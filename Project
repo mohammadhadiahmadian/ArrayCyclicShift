@@ -1,0 +1,101 @@
+import java.util.*;
+
+public class Project {
+
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+        int arrayLength, instructionsCount;
+        String string;
+
+        //Getting array length
+        string = input.next();
+        arrayLength = Integer.parseInt(string);
+
+        //Getting instructions count
+        string = input.next();
+        instructionsCount = Integer.parseInt(string);
+
+        //Defining array
+        LinkedList<Integer>[] array = new LinkedList[(int) Math.sqrt(arrayLength)];
+
+        //Resolving null pointer exception
+        for (int i = 0 ; i < (int) Math.sqrt(arrayLength) ; i++) {
+            array[i] = new LinkedList<Integer>();
+        }
+
+        //Getting values and putting them in array
+        for (int i = 0 ; i < (int) Math.sqrt(arrayLength) ; i++) {
+            for (int j = 0 ; j < (int) Math.sqrt(arrayLength) ; j++) {
+                string = input.next();
+                array[i].add(Integer.parseInt(string));
+            }
+        }
+
+        //Putting remaining numbers in last linked list
+        int z = (int) Math.sqrt(arrayLength) * (int) Math.sqrt(arrayLength);
+        if (z != arrayLength) {
+            for (int i = 0 ; i < arrayLength - z ; i++) {
+                string = input.next();
+                array[(int) Math.sqrt(arrayLength) - 1].add(Integer.parseInt(string));
+            }
+        }
+
+        //Getting and executing instructions
+        for (int i = 0 ; i < instructionsCount ; i++) {
+            int y = 0, x = 0;
+
+            //Detecting instruction
+            string = input.next();
+
+            //Executing instruction of first kind (cyclic shift with array[i] and array[j])
+            if (Integer.parseInt(string) == 1) {
+
+                //Finding start index
+                string = input.next();
+                int start = Integer.parseInt(string);
+                while (start > array[x].size()) {
+                    start -= array[x].size();
+                    x++;
+                }
+                start--;
+
+                //Finding end index
+                string = input.next();
+                int end = Integer.parseInt(string);
+                while (end > array[y].size()) {
+                    end -= array[y].size();
+                    y++;
+                }
+                end--;
+
+                //Deleting last member of middle linked lists and adding them into the first place of the next one
+                for (int n = x + 1 ; n < y ; n++) {
+                    array[n + 1].addFirst(array[n].getLast());
+                    array[n].removeLast();
+                    if (n == y - 1) {
+                        end++;
+                    }
+                }
+
+                //Deleting end index and adding it before start index
+                array[x].add(start, array[y].get(end));
+                array[y].remove(end);
+
+            }
+
+            //Executing instruction of second kind (printing array[i])
+            else {
+                string = input.next();
+                int index = Integer.parseInt(string);
+                while (index > array[y].size()) {
+                    index -= array[y].size();
+                    y++;
+                }
+                System.out.println(array[y].get(index - 1));
+            }
+        }
+
+    }
+
+}
