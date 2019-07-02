@@ -42,10 +42,10 @@ public class Project {
             //x is index of start linked list and y is index of end linked list
             int x = 0, y = 0;
 
-            int s = input.nextInt();
+            int instruction = input.nextInt();
 
             //Executing instruction of first kind (cyclic shift with array[i] and array[j])
-            if (s == 1) {
+            if (instruction == 1) {
 
                 //Finding start index
                 int start = input.nextInt();
