@@ -42,8 +42,10 @@ public class Project {
             //x is index of start linked list and y is index of end linked list
             int x = 0, y = 0;
 
+            int s = input.nextInt();
+
             //Executing instruction of first kind (cyclic shift with array[i] and array[j])
-            if (input.nextInt() == 1) {
+            if (s == 1) {
 
                 //Finding start index
                 int start = input.nextInt();
@@ -66,14 +68,20 @@ public class Project {
                     array[n + 1].addFirst(array[n].getLast());
                     array[n].removeLast();
 
-                    //Adding end index in case of one member is added to the first place of linked list
-                    if (n == y - 1) {
-                        end++;
-                    }
+                }
+
+                //Adding end index in case of one member is added to the first place of end linked list
+                if (y - x > 1) {
+                    end++;
                 }
 
                 //Deleting end index and adding it before start index
                 array[x].add(start, array[y].get(end));
+
+                //If both members are in the same linked list and end be added before start, it should increase to be correct
+                if (x == y)
+                    end++;
+
                 array[y].remove(end);
 
             }
