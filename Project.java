@@ -41,7 +41,6 @@ public class Project {
 
             //x is index of start linked list and y is index of end linked list
             int x = 0, y = 0;
-
             int instruction = input.nextInt();
 
             //Executing instruction of first kind (cyclic shift with array[start] and array[end])
@@ -95,6 +94,7 @@ public class Project {
                 System.out.println(array[y].get(index - 1));
             }
         }
+
     }
 
 }
