@@ -44,7 +44,7 @@ public class Project {
 
             int instruction = input.nextInt();
 
-            //Executing instruction of first kind (cyclic shift with array[i] and array[j])
+            //Executing instruction of first kind (cyclic shift with array[start] and array[end])
             if (instruction == 1) {
 
                 //Finding start index
@@ -79,14 +79,13 @@ public class Project {
                 array[x].add(start, array[y].get(end));
 
                 //If both members are in the same linked list and end be added before start, it should increase to be correct
-                if (x == y)
+                if (x == y) {
                     end++;
-
+                }
                 array[y].remove(end);
-
             }
 
-            //Executing instruction of second kind (printing array[i])
+            //Executing instruction of second kind (printing array[index])
             else {
                 int index = input.nextInt();
                 while (index > array[y].size()) {
@@ -96,7 +95,6 @@ public class Project {
                 System.out.println(array[y].get(index - 1));
             }
         }
-
     }
 
 }
